@@ -298,6 +298,14 @@
       transition: opacity .45s ease, transform .45s ease;
     }
 
+    .gallery-popup {
+      touch-action: pan-x pan-y;
+    }
+
+    .main-preview {
+      touch-action: none;
+    }
+
 
     .main-preview {
       position: relative;
@@ -841,6 +849,24 @@
       if (e.target.id === 'galleryPopup' || e.target.id === 'popupImage') {
         closeGallery();
       }
+
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+
+      document.addEventListener('gesturechange', function (e) {
+        e.preventDefault();
+      });
+
+      document.addEventListener('gestureend', function (e) {
+        e.preventDefault();
+      });
+
+      document.addEventListener('touchmove', function (e) {
+        if (e.scale !== undefined && e.scale !== 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
     });
   </script>
 
